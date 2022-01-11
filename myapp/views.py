@@ -12,3 +12,15 @@ def service(request):
 
 def menu(request):
     return render(request,'menu.html')
+
+def booking(request):
+    return render(request,'booking.html')
+
+def testimonial(request):
+    return render(request,'testimonial.html')
+
+def team(request):
+    return render(request,'team.html')
+
+def contact(request):
+    return render(request,'contact.html')
