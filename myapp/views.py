@@ -2,10 +2,13 @@ from django.shortcuts import render,HttpResponse
 
 
 def index(request):
-    return render(request,'index.html',)
+    return render(request,'index.html')
 
 def about(request):
-    return HttpResponse("about")
+    return render(request,'about.html')
 
-def services(request):
-    return HttpResponse("Services")
+def service(request):
+    return render(request,'service.html')
+
+def menu(request):
+    return render(request,'menu.html')
