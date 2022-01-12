@@ -152,13 +152,13 @@
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9)), url(../img/bg-hero.jpg);
+    background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9)), url(../videos/video.mp4);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.hero-header img {
+.hero-header video {
     animation: imgRotate 50s linear infinite;
 }
 
