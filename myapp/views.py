@@ -28,7 +28,7 @@ def menu(request):
     return render(request,'menu.html', {"local_vc": local_vc})
 
 def booking(request):
-    print('########################',type(vc))
+    print('######################',type(vc))
     # print(market)
     # print(vc)
     local_price = market
