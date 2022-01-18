@@ -1,13 +1,8 @@
 from django.shortcuts import render,HttpResponse
 from pycoingecko import CoinGeckoAPI
 cg = CoinGeckoAPI()
-global price, list1, market, vc
-# price = cg.get_price(ids='bitcoin,litecoin', vs_currencies='inr,eur')
-market = cg.get_coins_markets(vs_currency='inr')
-# ids = cg.get_coin_by_id()
-# list1 = cg.get_coins_list(ids='', name='', symbol='')
-# for i in range (len(ids)):
-vc = cg.get_coins_list()
+
+
 
 
 
@@ -21,19 +16,34 @@ def service(request):
     return render(request,'service.html')
 
 def menu(request):
-    for i in range(0, len(vc)):
-        print(vc[i])
-        local_vc = len(vc)
-        print(local_vc)
-    return render(request,'menu.html', {"local_vc": local_vc})
+    price = cg.get_coins_markets(vs_currency='inr')
+    dic = price[1]
+    print(dic['id'])
+    name = []
+    img = []
+    cr_price = []
+    hi_price = []
+    lo_price = []
+
+    for i in range(len(price)):
+        dicc = price[i]
+        name.append(dicc['id'])
+        img.append(dicc['image'])
+        cr_price.append(dicc['current_price'])
+        hi_price.append(dicc['high_24h'])
+        lo_price.append(dicc['low_24h'])
+
+    print(name)
+    print(img)
+    print(cr_price)
+
+    mylist = zip(name, img, cr_price, hi_price, lo_price)
+
+    return render(request, 'menu.html', {'mylist': mylist})
+
 
 def booking(request):
-    print('######################',type(vc))
-    # print(market)
-    # print(vc)
-    local_price = market
-
-    return render(request,'booking.html', {"local_price": local_price})
+    return render(request,'booking.html')
 
 def testimonial(request):
     return render(request,'testimonial.html')
