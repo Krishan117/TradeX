@@ -1,13 +1,30 @@
 from django.shortcuts import render,HttpResponse
 from pycoingecko import CoinGeckoAPI
+from newsapi import NewsApiClient
 cg = CoinGeckoAPI()
-
-
-
+import requests
+import json
 
 
 def index(request):
-    return render(request, 'index.html')
+    # Init
+    newsapi = NewsApiClient(api_key='6e7eacc7bb504b55a56f04a05456b9f5')
+
+    # /v2/top-headlines
+    top = newsapi.get_top_headlines(country='in', category='business')
+    articles = top['articles']
+    # print(articles)
+    n_img = []
+    title = []
+    dec = []
+    for i in range(len(articles)):
+        dic = articles[i]
+        n_img.append(dic['urlToImage'])
+        title.append(dic['title'])
+        dec.append(dic['description'])
+
+    list1 = zip(n_img, title, dec)
+    return render(request, 'index.html', {'list1': list1})
 
 def about(request):
     return render(request,'about.html')
@@ -16,34 +33,58 @@ def service(request):
     return render(request,'service.html')
 
 def menu(request):
+    #  FOR CRYPTO
     price = cg.get_coins_markets(vs_currency='inr')
-    dic = price[1]
-    print(dic['id'])
     name = []
     img = []
     cr_price = []
     hi_price = []
     lo_price = []
+    rank = []
 
     for i in range(len(price)):
         dicc = price[i]
-        name.append(dicc['id'])
+        name.append(dicc['name'])
         img.append(dicc['image'])
         cr_price.append(dicc['current_price'])
         hi_price.append(dicc['high_24h'])
         lo_price.append(dicc['low_24h'])
+        rank.append(dicc['market_cap_rank'])
+    mylist = zip(name, img, cr_price, hi_price, lo_price, rank)
 
-    print(name)
-    print(img)
-    print(cr_price)
+    # FOR STOCKS
+    url = "https://latest-stock-price.p.rapidapi.com/any"
+    headers = {
+        'x-rapidapi-host': "latest-stock-price.p.rapidapi.com",
+        'x-rapidapi-key': "a0cbf7e4a6msh8774514d0c1c6c5p1e0d80jsn3374cad14b76"
+    }
+    response = requests.request("GET", url, headers=headers)
+    l1 = response.text
+    a = json.loads(l1)
+    s_name = []
+    s_price = []
+    d_high = []
+    d_low = []
+    s_change = []
+    p_change = []
 
-    mylist = zip(name, img, cr_price, hi_price, lo_price)
+    for j in range(len(a)):
+        s_dic = a[j]
+        s_name.append(s_dic['symbol'])
+        s_price.append(s_dic['lastPrice'])
+        d_high.append(s_dic['dayHigh'])
+        d_low.append(s_dic['dayLow'])
+        s_change.append(s_dic['change'])
+        p_change.append(s_dic['pChange'])
+        # if range(9):
+        #     break
 
-    return render(request, 'menu.html', {'mylist': mylist})
+    l2 = zip(s_name, s_price, d_high, d_low, s_change, p_change)
+    return render(request, 'menu.html', {'mylist': mylist, 'l2': l2})
 
 
 def booking(request):
-    return render(request,'booking.html')
+    return render(request, 'booking.html')
 
 def testimonial(request):
     return render(request,'testimonial.html')
