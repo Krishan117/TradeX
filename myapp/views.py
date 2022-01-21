@@ -7,10 +7,24 @@ import json
 
 
 def index(request):
-    # Init
-    newsapi = NewsApiClient(api_key='6e7eacc7bb504b55a56f04a05456b9f5')
+    # Trending Crypto
+    trending = cg.get_search_trending(vs_currency='inr')
+    l1 = trending['coins']
+    # print(l1)
+    mydic = {}
+    name1 = []
+    img1 = []
+    price1 = []
+    for i in l1:
+        mydic = i["item"]
+        for j in i.values():
+            name1.append(j["name"])
+            img1.append(j["large"])
+            price1.append(j["price_btc"])
+            cryptrendlist = zip(name1, img1, price1)
 
-    # /v2/top-headlines
+    # top-headlines
+    newsapi = NewsApiClient(api_key='6e7eacc7bb504b55a56f04a05456b9f5')
     top = newsapi.get_top_headlines(country='in', category='business')
     articles = top['articles']
     # print(articles)
@@ -24,7 +38,7 @@ def index(request):
         dec.append(dic['description'])
 
     list1 = zip(n_img, title, dec)
-    return render(request, 'index.html', {'list1': list1})
+    return render(request, 'index.html', {'list1': list1, 'cryptrendlist': cryptrendlist})
 
 def about(request):
     return render(request,'about.html')
@@ -76,7 +90,7 @@ def menu(request):
         d_low.append(s_dic['dayLow'])
         s_change.append(s_dic['change'])
         p_change.append(s_dic['pChange'])
-        # if range(9):
+        # if a[0:9]:
         #     break
 
     l2 = zip(s_name, s_price, d_high, d_low, s_change, p_change)
