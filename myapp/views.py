@@ -91,6 +91,7 @@ def menu(request):
         s_change.append(s_dic['change'])
         p_change.append(s_dic['pChange'])
         # if a[0:9]:
+
         #     break
 
     l2 = zip(s_name, s_price, d_high, d_low, s_change, p_change)
