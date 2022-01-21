@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render, HttpResponse
 from pycoingecko import CoinGeckoAPI
 from newsapi import NewsApiClient
 cg = CoinGeckoAPI()
