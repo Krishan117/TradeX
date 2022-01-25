@@ -4,6 +4,8 @@ from newsapi import NewsApiClient
 cg = CoinGeckoAPI()
 import requests
 import json
+import calendar
+import datetime
 
 
 def index(request):
@@ -55,7 +57,7 @@ def menu(request):
     hi_price = []
     lo_price = []
     rank = []
-
+    print(type(price))
     for i in range(len(price)):
         dicc = price[i]
         name.append(dicc['name'])
@@ -99,10 +101,41 @@ def menu(request):
 
 
 def booking(request):
-    return render(request, 'booking.html')
+    from pycoingecko import CoinGeckoAPI
+    cg = CoinGeckoAPI()
+
+    import calendar
+    import datetime
+
+    # to timestemp
+
+    date = datetime.datetime.utcnow()
+    utc_time = (str(calendar.timegm(date.utctimetuple())))
+    # print(type(utc_time))
+
+    # from timestamp
+
+    future = datetime.datetime.utcnow() - datetime.timedelta(hours=24)
+    p1 = (str(calendar.timegm(future.timetuple())))
+    # print(p1)
+
+    graph = cg.get_coin_market_chart_range_by_id(id='bitcoin', vs_currency='inr', from_timestamp=p1,
+                                                 to_timestamp=utc_time)
+    # print(graph.keys())
+    l1 = graph['prices']
+    l2 = []
+    l3 = []
+    for prices in l1:
+        l2.append(prices[0])
+        l3.append(prices[1])
+
+    # print(l2,l3)
+    # cl= zip(l2, l3)
+    return render(request, 'booking.html', {'l1': l1, 'l2': l2, 'l3': l3})
 
 def testimonial(request):
-    return render(request,'testimonial.html')
+
+    return render(request, 'testimonial.html')
 
 def team(request):
     return render(request,'team.html')

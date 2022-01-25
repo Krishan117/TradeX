@@ -167,50 +167,151 @@
 <!--                </div>-->
 <!--            </div>-->
 <!--        </div>-->
-        <!-- Reservation end -->
+             <!-- Reservation end -->
+         <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Get Started</h5>
+                    <h1 class="mb-5">Most Popular</h1>
+                </div>
+                <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
 
-        <!-- Graph start -->
-            <h1>GRAPH</h1>
-         <div class="row g-6">
+                                <div class="ps-3">
+                                    <small class="text-body">Popular</small>
+                                    <h6 class="mt-n1 mb-0">CryptoCurriencies</h6>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
 
-            <div class="col-lg-6">
-            <div>
-                <canvas id="myChart"></canvas>
-            </div>
-            </div>
-         </div>
-        <!-- Graph end -->
+                                <div class="ps-3">
+                                    <small class="text-body">Popular</small>
+                                    <h6 class="mt-n1 mb-0">Stocks</h6>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
+
+                                <div class="ps-3">
+                                    <small class="text-body">Popular</small>
+                                    <h6 class="mt-n1 mb-0">Mutual Funds</h6>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Graph start -->
+            <h1>Bitcoin</h1>
+                      <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-6 mx-sm-5">
+                         <canvas id="myChart" role="img"></canvas>
+                        </div>
+                    </div>
+
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
-          const labels = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-          ];
+      const labels = {{l2}};
 
-          const data = {
-            labels: labels,
-            datasets: [{
-              label: 'My First dataset',
-              backgroundColor: 'rgb(0, 255, 0)',
-              borderColor: 'rgb(0, 255, 0)',
-              data: [0, 10, 5, 2, 20, 30, 45],
-            }]
-          };
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'Price (past 1 day) in INR',
+            data: {{l1}},
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+          }]
+        };
 
-          const config = {
-            type: 'line',
-            data: data,
-            options: {}
-          };
+      const config = {
+        type: 'line',
+         data: data,
+      };
+
           const myChart = new Chart(
             document.getElementById('myChart'),
             config
           );
+
         </script>
+        <!-- Graph end -->
+                           <div id="tab-2" class="tab-pane fade show p-0">
+                               <div class="row g-6 mx-sm-5">
+                                   <canvas id="myChart-2" role="img"></canvas>
+                        </div>
+                    </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+      const labels = {{l2}};
+
+        const data-2 = {
+          labels: labels,
+          datasets: [{
+            label: 'Price (past 1 day) in INR',
+            data: {{l1}},
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+          }]
+        };
+
+      const config-2 = {
+        type: 'line',
+         data: data,
+      };
+
+          const myChart-2 = new Chart(
+            document.getElementById('myChart-2'),
+            config
+          );
+
+        </script>
+        <!-- Graph end -->
+                      </div>
+                </div>
+            </div>
+         </div>
+
+
+        <!-- Graph start -->
+<!--            <h1>Bitcoin</h1>-->
+<!--         <div class="row g-6 mx-sm-5">-->
+<!--             <canvas id="myChart"></canvas>-->
+<!--         </div>-->
+
+<!--        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
+<!--        <script>-->
+<!--      const labels = {{l2}};-->
+
+<!--        const data = {-->
+<!--          labels: labels,-->
+<!--          datasets: [{-->
+<!--            label: 'Price (past 1 day) in INR',-->
+<!--            data: {{l1}},-->
+<!--            fill: false,-->
+<!--            borderColor: 'rgb(75, 192, 192)',-->
+<!--            tension: 0.1-->
+<!--          }]-->
+<!--        };-->
+
+<!--      const config = {-->
+<!--        type: 'line',-->
+<!--         data: data,-->
+<!--      };-->
+
+<!--          const myChart = new Chart(-->
+<!--            document.getElementById('myChart'),-->
+<!--            config-->
+<!--          );-->
+
+<!--        </script>-->
+        <!-- Graph end -->
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
