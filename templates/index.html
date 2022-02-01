@@ -74,46 +74,75 @@
                         </div>
                         <a href="{% url 'contact'%}" class="nav-item nav-link">Contact</a>
                     </div>
-                    <button class="btn btn-primary py-2 px-4" data-toggle="modal" data-target="#login">Login \ SignUp</button>
+                    {% if request.user.is_authenticated %}
+                        <a class="btn btn-primary py-2 px-4" href="{% url 'log_out' %}" role="button">{{user}}</a>
+                    {% else %}
+                        <a class="btn btn-primary py-2 px-4" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Login \ SignUp</a>
+                    {% endif %}
                 </div>
             </nav>
+
 <!--Modal Start-->
-             <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form name="form1">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Name:</label>
-              <input type="text" class="form-control" name="txtname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
+            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalToggleLabel">LOGIN</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                     <div class="modal-body">
+                        <form name="form1" method="POST" action="{% url 'log_in' %}">
+                            {% csrf_token %}
+                             <div class="form-group">
+                                <label for="email">Email-ID:</label>
+                                <input type="text" class="form-control" name="username" id="email" aria-describedby="emailHelp" placeholder="Enter Email">
+                             </div>
+                            <div class="form-group">
+                                <label for="Password">Password:</label>
+                                <input type="password" class="form-control" name="password" id="Password" placeholder="Enter Password">
+                            </div>
+                     </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-dismiss="modal" data-bs-toggle="modal">Create New Account</button>
+                    </div>
+                      </form>
+                  </div>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Email:</label>
-              <input type="email"  name="txtmail" class="form-control" id="txtmail" placeholder="Enter Email">
+            <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalToggleLabel2">CREATE NEW ACCOUNT</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                        <div class="modal-body">
+                            <form name="form1" method="post" action="{% url 'register' %}">
+                                {% csrf_token %}
+                             <div class="form-group">
+                                <label for="email">Email-ID:</label>
+                                <input type="text" class="form-control" name="username" id="semail" aria-describedby="emailHelp" placeholder="Enter Email">
+                             </div>
+                             <div class="form-group">
+                                <label for="spassword">Password:</label>
+                                <input type="password" class="form-control" name="password" id="sPassword" placeholder="Enter Password">
+                             </div>
+                             <div class="form-group">
+                                <label for="cpassword">Confirm Password:</label>
+                                <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Re-Enter Password">
+                             </div>
+                        </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-dismiss="modal" data-bs-toggle="modal">Already Have Account</button>
+                      <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                      </form>
+                  </div>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Phone:</label>
-              <input type="number" class="form-control" name="num" id="num" placeholder="Enter Phone">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Mention Your Case:</label>
-              <input type="text" class="form-control" name="txtcase" id="exampleInputPassword1" placeholder="Enter Disease">
-            </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="validateForm()">Book</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<!--            <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>-->
+
 <!--Modal End-->
             <div class="container-xxl py-5 bg-dark hero-header mb-5">
                 <div class="container my-5 py-5">

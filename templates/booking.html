@@ -205,73 +205,86 @@
                         </li>
                     </ul>
                     <!-- Graph start -->
+                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <h1>Bitcoin</h1>
                       <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <div class="row g-6 mx-sm-5">
-                         <canvas id="myChart" role="img"></canvas>
-                        </div>
+<!--                        <div class="col-md-2">-->
+                          <div id="chart_div"></div>
+<!--                        </div>-->
                     </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-      const labels = {{l2}};
 
-        const data = {
-          labels: labels,
-          datasets: [{
-            label: 'Price (past 1 day) in INR',
-            data: {{l1}},
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-          }]
-        };
 
-      const config = {
-        type: 'line',
-         data: data,
-      };
 
-          const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-          );
 
-        </script>
+        <script type="text/javascript">
+
+        google.charts.load('current', {packages: ['corechart', 'line']});
+        google.charts.setOnLoadCallback(drawCurveTypes);
+
+        function drawCurveTypes() {
+              var data = new google.visualization.DataTable();
+              data.addColumn('timeofday', 'X');
+              data.addColumn('number', 'Price in INR');
+
+
+              data.addRows({{mainlist}});
+
+              var options = {
+                 width: 1000,
+                 height: 600,
+                hAxis: {
+
+
+                  title: 'Time'
+                },
+                vAxis: {
+
+                  title: 'Popularity'
+                },
+                series: {
+                  1: {curveType: 'function'}
+                }
+              };
+
+              var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+              chart.draw(data, options);
+            }
+            </script>
         <!-- Graph end -->
                            <div id="tab-2" class="tab-pane fade show p-0">
-                               <div class="row g-6 mx-sm-5">
-                                   <canvas id="myChart-2" role="img"></canvas>
-                        </div>
+                               <div>
+                                  <canvas id="myChart"></canvas>
+                                </div>
                     </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
-      const labels = {{l2}};
+              const labels = {{s}};
 
-        const data-2 = {
-          labels: labels,
-          datasets: [{
-            label: 'Price (past 1 day) in INR',
-            data: {{l1}},
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-          }]
+          const data = {
+            labels: labels,
+            datasets: [{
+              label: 'My First dataset',
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: {{g1}},
+            }]
+          };
+
+
+        const config = {
+          type: 'line',
+          data: data,
         };
-
-      const config-2 = {
-        type: 'line',
-         data: data,
-      };
-
-          const myChart-2 = new Chart(
-            document.getElementById('myChart-2'),
-            config
-          );
-
         </script>
+                          <script>
+                              const myChart = new Chart(
+                                document.getElementById('myChart'),
+                                config
+                              );
+                          </script>
         <!-- Graph end -->
                       </div>
                 </div>
@@ -393,6 +406,8 @@
     <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
     <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
     <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>

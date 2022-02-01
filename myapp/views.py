@@ -1,12 +1,19 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
+from django.views.generic import View
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from pycoingecko import CoinGeckoAPI
 from newsapi import NewsApiClient
+from django.contrib.auth import authenticate,login,logout
 cg = CoinGeckoAPI()
 import requests
 import json
+import pandas as pd
+import pytz
 import calendar
 import datetime
-
+from myapp.forms import *
 
 def index(request):
     # Trending Crypto
@@ -101,12 +108,6 @@ def menu(request):
 
 
 def booking(request):
-    from pycoingecko import CoinGeckoAPI
-    cg = CoinGeckoAPI()
-
-    import calendar
-    import datetime
-
     # to timestemp
 
     date = datetime.datetime.utcnow()
@@ -122,17 +123,41 @@ def booking(request):
     graph = cg.get_coin_market_chart_range_by_id(id='bitcoin', vs_currency='inr', from_timestamp=p1,
                                                  to_timestamp=utc_time)
     # print(graph.keys())
-    l1 = graph['prices']
-    l2 = []
-    l3 = []
-    for prices in l1:
-        l2.append(prices[0])
-        l3.append(prices[1])
+    g1 = graph['prices']
+    g2 = []
+    g3 = []
+    time1 = []
+    mainlist = []
+    for prices in g1:
+        g2.append(prices[0])
+        g3.append(prices[1])
 
-    # print(l2,l3)
-    # cl= zip(l2, l3)
-    return render(request, 'booking.html', {'l1': l1, 'l2': l2, 'l3': l3})
+    for i in g2:
+        t1 = pd.to_datetime(i, utc=True, unit='ms')
+        st = str(t1.time())
+        time1.append(st)
+    # print(time1)
+    s = []
+    for i in range(len(time1)):
+        x = time1[i]
+        sp = x.split(":")
+        ns = []
+        for j in sp:
+            a = float(j)
+            ns.append(int(round(a)))
+        s.append(ns)
+    print(s)
 
+    for i in range(len(g3)):
+        lis = [s[i], g3[i]]
+        mainlist.append(lis)
+
+    a = "11:12:20.12222"
+
+    # print(mainlist)
+    # print(g1)
+    # cl= zip(g2, g3)
+    return render(request, 'booking.html', {'g1': g1, 'g2': g2, 'mainlist': mainlist, 's': s})
 def testimonial(request):
 
     return render(request, 'testimonial.html')
@@ -142,3 +167,54 @@ def team(request):
 
 def contact(request):
     return render(request,'contact.html')
+
+def register(request):
+    if request.method == "POST":
+        password = request.POST.get('password')
+        cpassword = request.POST.get('cpassword')
+        if password == cpassword:
+            form = UserForm(request.POST)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.set_password(request.POST.get('password'))
+                obj.save()
+                return redirect('index')
+            else:
+                print(form.errors)
+                return HttpResponse('invalid')
+        else:
+            return HttpResponse('Password Does Not Match')
+    return render(request,'index.html')
+
+def log_in(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active:
+                login(request,user)
+                return redirect('index')
+            else:
+                return HttpResponse('Invalid')
+        else:
+            return HttpResponse('auth Failed')
+def log_out(request):
+    logout(request)
+    return redirect('index')
+
+
+class ChartData(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, format=None):
+        labels = []
+        chartLabel = "my data"
+        chartdata = [0, 10, 5, 2, 20, 30, 45]
+        data = {
+            "labels": labels,
+            "chartLabel": chartLabel,
+            "chartdata": chartdata,
+        }
+        return Response(data)
