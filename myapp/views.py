@@ -146,18 +146,16 @@ def booking(request,name):
             a = float(j)
             ns.append(int(round(a)))
         s.append(ns)
-    print(s)
+    # print(s)
 
     for i in range(len(g3)):
         lis = [s[i], g3[i]]
         mainlist.append(lis)
 
-    a = "11:12:20.12222"
-
     # print(mainlist)
     # print(g1)
     # cl= zip(g2, g3)
-    return render(request, 'booking.html', {'g1': g1, 'g2': g2, 'mainlist': mainlist, 's': s,'id':id})
+    return render(request, 'booking.html', {'g1': g1, 'g2': g2, 'mainlist': mainlist, 's': s, 'id': id})
 def testimonial(request):
 
     return render(request, 'testimonial.html')
