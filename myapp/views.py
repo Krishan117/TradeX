@@ -107,9 +107,9 @@ def menu(request):
     return render(request, 'menu.html', {'mylist': mylist, 'l2': l2})
 
 
-def booking(request):
+def booking(request,name):
     # to timestemp
-
+    print(name)
     date = datetime.datetime.utcnow()
     utc_time = (str(calendar.timegm(date.utctimetuple())))
     # print(type(utc_time))
@@ -119,8 +119,8 @@ def booking(request):
     future = datetime.datetime.utcnow() - datetime.timedelta(hours=24)
     p1 = (str(calendar.timegm(future.timetuple())))
     # print(p1)
-
-    graph = cg.get_coin_market_chart_range_by_id(id='bitcoin', vs_currency='inr', from_timestamp=p1,
+    id = name.lower()
+    graph = cg.get_coin_market_chart_range_by_id(id, vs_currency='inr', from_timestamp=p1,
                                                  to_timestamp=utc_time)
     # print(graph.keys())
     g1 = graph['prices']
@@ -157,7 +157,7 @@ def booking(request):
     # print(mainlist)
     # print(g1)
     # cl= zip(g2, g3)
-    return render(request, 'booking.html', {'g1': g1, 'g2': g2, 'mainlist': mainlist, 's': s})
+    return render(request, 'booking.html', {'g1': g1, 'g2': g2, 'mainlist': mainlist, 's': s,'id':id})
 def testimonial(request):
 
     return render(request, 'testimonial.html')

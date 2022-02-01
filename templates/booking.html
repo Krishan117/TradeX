@@ -206,9 +206,9 @@
                     </ul>
                     <!-- Graph start -->
                     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <h1>Bitcoin</h1>
+            <h1>{{id}}</h1>
                       <div class="tab-content">
-                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div id="tab-2" class="tab-pane fade show p-0">
 <!--                        <div class="col-md-2">-->
                           <div id="chart_div"></div>
 <!--                        </div>-->
@@ -253,7 +253,7 @@
             }
             </script>
         <!-- Graph end -->
-                           <div id="tab-2" class="tab-pane fade show p-0">
+                           <div id="tab-1" class="tab-pane fade show p-0 active">
                                <div>
                                   <canvas id="myChart"></canvas>
                                 </div>
@@ -266,9 +266,9 @@
           const data = {
             labels: labels,
             datasets: [{
-              label: 'My First dataset',
-              backgroundColor: 'rgb(255, 99, 132)',
-              borderColor: 'rgb(255, 99, 132)',
+              label: 'Price (past 1 Days) in INR',
+              backgroundColor: '#fea116',
+              borderColor: '#fea116',
               data: {{g1}},
             }]
           };

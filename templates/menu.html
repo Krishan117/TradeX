@@ -63,7 +63,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu m-0">
-<!--                                <a href="{% url 'booking' %}" class="dropdown-item">Booking</a>-->
+
                                 <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
                                 <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
                             </div>
@@ -129,10 +129,13 @@
                     </ul>
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane fade show p-0 active">
+
                             <div class="row g-4 mx-sm-4">
                                  {% for name, img, price, hi_price, lo_price, rank  in mylist %}
+                                <a href="{% url 'booking' name %}">
 <!--                                <div class="col-lg-6">-->
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center" >
+
                                         <img class="flex-shrink-0 img-fluid rounded" src="{{img}}" alt="" style="width: 80px;">
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <h5 class="d-flex justify-content-between border-bottom pb-2">
@@ -142,10 +145,12 @@
                                             <small class="fst-bold"> Rank <span class="text-primary">{{rank}}</span> | Today's High <span style="color:lightgreen">₹{{hi_price}}</span> | Today's Low <span style="color:red">₹{{lo_price}}</span></small>
                                         </div>
                                     </div>
+                                    </a>
                                     <br>
 <!--                                </div>-->
                                 {% endfor %}
                             </div>
+                            </a>
                         </div>
                         <div id="tab-2" class="tab-pane fade show p-0">
                             <div class="row g-4 mx-sm-4">
