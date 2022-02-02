@@ -5,7 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from pycoingecko import CoinGeckoAPI
 from newsapi import NewsApiClient
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate, login, logout
+
 cg = CoinGeckoAPI()
 import requests
 import json
@@ -14,6 +15,7 @@ import pytz
 import calendar
 import datetime
 from myapp.forms import *
+
 
 def index(request):
     # Trending Crypto
@@ -49,11 +51,14 @@ def index(request):
     list1 = zip(n_img, title, dec)
     return render(request, 'index.html', {'list1': list1, 'cryptrendlist': cryptrendlist})
 
+
 def about(request):
-    return render(request,'about.html')
+    return render(request, 'about.html')
+
 
 def service(request):
-    return render(request,'service.html')
+    return render(request, 'service.html')
+
 
 def menu(request):
     #  FOR CRYPTO
@@ -64,16 +69,19 @@ def menu(request):
     hi_price = []
     lo_price = []
     rank = []
-    print(type(price))
+    id1 = []
+    # print(price)
     for i in range(len(price)):
         dicc = price[i]
+        print(dicc)
         name.append(dicc['name'])
         img.append(dicc['image'])
         cr_price.append(dicc['current_price'])
         hi_price.append(dicc['high_24h'])
         lo_price.append(dicc['low_24h'])
         rank.append(dicc['market_cap_rank'])
-    mylist = zip(name, img, cr_price, hi_price, lo_price, rank)
+        id1.append(dicc['id'])
+    mylist = zip(name, img, cr_price, hi_price, lo_price, rank, id1)
 
     # FOR STOCKS
     url = "https://latest-stock-price.p.rapidapi.com/any"
@@ -107,9 +115,9 @@ def menu(request):
     return render(request, 'menu.html', {'mylist': mylist, 'l2': l2})
 
 
-def booking(request,name):
+def booking(request, id1):
     # to timestemp
-    print(name)
+    print(id1)
     date = datetime.datetime.utcnow()
     utc_time = (str(calendar.timegm(date.utctimetuple())))
     # print(type(utc_time))
@@ -119,7 +127,9 @@ def booking(request,name):
     future = datetime.datetime.utcnow() - datetime.timedelta(hours=24)
     p1 = (str(calendar.timegm(future.timetuple())))
     # print(p1)
-    id = name.lower()
+    name = id1.upper()
+    id = id1
+
     graph = cg.get_coin_market_chart_range_by_id(id, vs_currency='inr', from_timestamp=p1,
                                                  to_timestamp=utc_time)
     # print(graph.keys())
@@ -138,15 +148,22 @@ def booking(request,name):
         time1.append(st)
     # print(time1)
     s = []
+    h = []
+    m = []
     for i in range(len(time1)):
         x = time1[i]
         sp = x.split(":")
+        hour1 = (sp[0])
+        mint = (sp[1])
         ns = []
         for j in sp:
+            h.append(int(hour1))
+            m.append(int(mint))
             a = float(j)
             ns.append(int(round(a)))
         s.append(ns)
-    # print(s)
+    print(h)
+    print(m)
 
     for i in range(len(g3)):
         lis = [s[i], g3[i]]
@@ -155,16 +172,21 @@ def booking(request,name):
     # print(mainlist)
     # print(g1)
     # cl= zip(g2, g3)
-    return render(request, 'booking.html', {'g1': g1, 'g2': g2, 'mainlist': mainlist, 's': s, 'id': id})
-def testimonial(request):
+    return render(request, 'booking.html',
+                  {'g1': g1, 'g2': g2, 'mainlist': mainlist, 's': s, 'id': id, 'id1': id1, 'name': name})
 
+
+def testimonial(request):
     return render(request, 'testimonial.html')
 
+
 def team(request):
-    return render(request,'team.html')
+    return render(request, 'team.html')
+
 
 def contact(request):
-    return render(request,'contact.html')
+    return render(request, 'contact.html')
+
 
 def register(request):
     if request.method == "POST":
@@ -182,7 +204,8 @@ def register(request):
                 return HttpResponse('invalid')
         else:
             return HttpResponse('Password Does Not Match')
-    return render(request,'index.html')
+    return render(request, 'index.html')
+
 
 def log_in(request):
     if request.method == "POST":
@@ -191,12 +214,14 @@ def log_in(request):
         user = authenticate(username=username, password=password)
         if user:
             if user.is_active:
-                login(request,user)
+                login(request, user)
                 return redirect('index')
             else:
                 return HttpResponse('Invalid')
         else:
             return HttpResponse('auth Failed')
+
+
 def log_out(request):
     logout(request)
     return redirect('index')
