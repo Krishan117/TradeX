@@ -162,8 +162,8 @@ def booking(request, id1):
             a = float(j)
             ns.append(int(round(a)))
         s.append(ns)
-    print(h)
-    print(m)
+    # print(h)
+    # print(m)
 
     for i in range(len(g3)):
         lis = [s[i], g3[i]]

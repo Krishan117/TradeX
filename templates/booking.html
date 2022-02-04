@@ -208,14 +208,14 @@
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>
-        const labels = {{s}};
+        const labels ={{s|safe}};
         const data = {
             labels: labels,
             datasets: [{
               label: 'Price (past 1 Days) in INR',
               backgroundColor: '#fea116',
               borderColor: '#fea116',
-              data: {{g1}},
+              data: {{g1|safe}},
             }]
           };
 
@@ -225,12 +225,14 @@
           data: data,
         };
 
+
                     </script>
                     <script>
                               const myChart24 = new Chart(
                                 document.getElementById('myChart24'),
                                 config
                               );
+
 
                     </script>
                     <!-- Graph end -->
@@ -258,12 +260,14 @@
                               data: data,
                             };
 
+
                     </script>
                     <script>
                               const myChart = new Chart(
                                 document.getElementById('myChart'),
                                 config
                               );
+
 
                     </script>
                     <!-- Graph end -->
