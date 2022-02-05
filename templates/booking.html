@@ -78,7 +78,14 @@
 
         <div class="container-xxl py-5 bg-dark hero-header mb-5">
             <div class="container text-center my-5 pt-5 pb-4">
-
+                <h1 class="display-3 text-white mb-3 animated slideInDown">{{name}}</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center text-uppercase">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">{{name}}</li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
@@ -199,7 +206,7 @@
                 </ul>
                 <!-- Graph start -->
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                <h1>{{name}}</h1>
+<!--                <h1>{{name}}</h1>-->
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div>
@@ -208,26 +215,23 @@
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>
-        const labels ={{s|safe}};
-        const data = {
-            labels: labels,
-            datasets: [{
-              label: 'Price (past 1 Days) in INR',
-              backgroundColor: '#fea116',
-              borderColor: '#fea116',
-              data: {{g1|safe}},
-            }]
-          };
+                            const labels ={{time1|safe}};
+                            const data = {
+                                labels: labels,
+                                datasets: [{
+                                  label: 'Price (past 24 hours) in INR',
+                                  backgroundColor: '#fea116',
+                                  borderColor: '#fea116',
+                                  data: {{g1|safe}},
+                                }]
+                              };
 
 
-        const config = {
-          type: 'line',
-          data: data,
-        };
+                            const config = {
+                              type: 'line',
+                              data: data,
+                            };
 
-
-                    </script>
-                    <script>
                               const myChart24 = new Chart(
                                 document.getElementById('myChart24'),
                                 config
@@ -239,36 +243,30 @@
 
                     <div id="tab-2" class="tab-pane fade show p-0">
                         <div>
-                            <canvas id="myChart"></canvas>
+                            <canvas id="dayschart"></canvas>
                         </div>
                     </div>
 
-                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>
-                              const labels = {{s}};
-                              const data = {
-                                labels: labels,
+                              const labels2 = {{time2|safe}};
+                              const data2 = {
+                                labels: labels2,
                                 datasets: [{
-                                  label: 'Price (past 1 Days) in INR',
+                                  label: 'Price (past 30 Days) in INR',
                                   backgroundColor: '#fea116',
                                   borderColor: '#fea116',
-                                  data: {{g1}},
+                                  data: {{gt1|safe}},
                                 }]
                               };
-                            const config = {
+                            const daysconfig = {
                               type: 'line',
-                              data: data,
+                              data: data2,
                             };
 
-
-                    </script>
-                    <script>
-                              const myChart = new Chart(
-                                document.getElementById('myChart'),
-                                config
+                              const dayschart = new Chart(
+                                document.getElementById('dayschart'),
+                                daysconfig
                               );
-
-
                     </script>
                     <!-- Graph end -->
                 </div>
