@@ -37,6 +37,7 @@
         .modal-open{overflow:hidden}.modal-open .modal{overflow-x:hidden;overflow-y:auto}.modal{position:fixed;top:0;left:0;z-index:1050;display:none;width:100%;height:100%;overflow:hidden;outline:0}.modal-dialog{position:relative;width:auto;margin:.5rem;pointer-events:none}.modal.fade .modal-dialog{transition:-webkit-transform .3s ease-out;transition:transform .3s ease-out;transition:transform .3s ease-out,-webkit-transform .3s ease-out;-webkit-transform:translate(0,-50px);transform:translate(0,-50px)}@media (prefers-reduced-motion:reduce){.modal.fade .modal-dialog{transition:none}}.modal.show .modal-dialog{-webkit-transform:none;transform:none}.modal.modal-static .modal-dialog{-webkit-transform:scale(1.02);transform:scale(1.02)}.modal-dialog-scrollable{display:-ms-flexbox;display:flex;max-height:calc(100% - 1rem)}.modal-dialog-scrollable .modal-content{max-height:calc(100vh - 1rem);overflow:hidden}.modal-dialog-scrollable .modal-footer,.modal-dialog-scrollable .modal-header{-ms-flex-negative:0;flex-shrink:0}.modal-dialog-scrollable .modal-body{overflow-y:auto}.modal-dialog-centered{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;min-height:calc(100% - 1rem)}.modal-dialog-centered::before{display:block;height:calc(100vh - 1rem);content:""}.modal-dialog-centered.modal-dialog-scrollable{-ms-flex-direction:column;flex-direction:column;-ms-flex-pack:center;justify-content:center;height:100%}.modal-dialog-centered.modal-dialog-scrollable .modal-content{max-height:none}.modal-dialog-centered.modal-dialog-scrollable::before{content:none}.modal-content{position:relative;display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;width:100%;pointer-events:auto;background-color:#fff;background-clip:padding-box;border:1px solid rgba(0,0,0,.2);border-radius:.3rem;outline:0}.modal-backdrop{position:fixed;top:0;left:0;z-index:1040;width:100vw;height:100vh;background-color:#000}.modal-backdrop.fade{opacity:0}.modal-backdrop.show{opacity:.5}.modal-header{display:-ms-flexbox;display:flex;-ms-flex-align:start;align-items:flex-start;-ms-flex-pack:justify;justify-content:space-between;padding:1rem 1rem;border-bottom:1px solid #dee2e6;border-top-left-radius:calc(.3rem - 1px);border-top-right-radius:calc(.3rem - 1px)}.modal-header .close{padding:1rem 1rem;margin:-1rem -1rem -1rem auto}.modal-title{margin-bottom:0;line-height:1.5}.modal-body{position:relative;-ms-flex:1 1 auto;flex:1 1 auto;padding:1rem}.modal-footer{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-align:center;align-items:center;-ms-flex-pack:end;justify-content:flex-end;padding:.75rem;border-top:1px solid #dee2e6;border-bottom-right-radius:calc(.3rem - 1px);border-bottom-left-radius:calc(.3rem - 1px)}.modal-footer>*{margin:.25rem}.modal-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}@media (min-width:576px){.modal-dialog{max-width:500px;margin:1.75rem auto}.modal-dialog-scrollable{max-height:calc(100% - 3.5rem)}.modal-dialog-scrollable .modal-content{max-height:calc(100vh - 3.5rem)}.modal-dialog-centered{min-height:calc(100% - 3.5rem)}.modal-dialog-centered::before{height:calc(100vh - 3.5rem)}.modal-sm{max-width:300px}}@media (min-width:992px){.modal-lg,.modal-xl{max-width:800px}}@media (min-width:1200px){.modal-xl{max-width:1140px}}
 
 
+
     </style>
 </head>
 
@@ -156,9 +157,8 @@
                 </div>
             </div>
         </div>
-        <!--            <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>-->
-
         <!--Modal End-->
+
         <div class="container-xxl py-5 bg-dark hero-header mb-5">
             <div class="container my-5 py-5">
                 <div class="row align-items-center g-5">
@@ -370,12 +370,12 @@
                         <div class="row g-4">
                             <div class="col-lg-6">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{% static 'img/menu-1.jpg'%}"
+                                    <img class="flex-shrink-0 img-fluid rounded" src="{% static 'img/menu1.jpg'%}"
                                          alt="" style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
+                                            <span>No Stock Found :( </span>
+                                            <span class="text-primary">$000</span>
                                         </h5>
                                         <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
                                     </div>
@@ -387,12 +387,12 @@
                         <div class="row g-4">
                             <div class="col-lg-6">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{% static 'img/menu-1.jpg'%}"
+                                    <img class="flex-shrink-0 img-fluid rounded" src="{% static 'img/menu1.jpg'%}"
                                          alt="" style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
+                                            <span>No Stock Found :( </span>
+                                            <span class="text-primary">$000</span>
                                         </h5>
                                         <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
                                     </div>
@@ -426,86 +426,32 @@
     </div>
     <!-- Menu End -->
 
-
-    <!--        &lt;!&ndash; Reservation Start &ndash;&gt;-->
-    <!--        <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">-->
-    <!--            <div class="row g-0">-->
-    <!--                <div class="col-md-6">-->
-    <!--                    <div class="video">-->
-    <!--                        <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">-->
-    <!--                            <span></span>-->
-    <!--                        </button>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--                <div class="col-md-6 bg-dark d-flex align-items-center">-->
-    <!--                    <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">-->
-    <!--                        <h5 class="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>-->
-    <!--                        <h1 class="text-white mb-4">Book A Table Online</h1>-->
-    <!--                        <form>-->
-    <!--                            <div class="row g-3">-->
-    <!--                                <div class="col-md-6">-->
-    <!--                                    <div class="form-floating">-->
-    <!--                                        <input type="text" class="form-control" id="name" placeholder="Your Name">-->
-    <!--                                        <label for="name">Your Name</label>-->
-    <!--                                    </div>-->
-    <!--                                </div>-->
-    <!--                                <div class="col-md-6">-->
-    <!--                                    <div class="form-floating">-->
-    <!--                                        <input type="email" class="form-control" id="email" placeholder="Your Email">-->
-    <!--                                        <label for="email">Your Email</label>-->
-    <!--                                    </div>-->
-    <!--                                </div>-->
-    <!--                                <div class="col-md-6">-->
-    <!--                                    <div class="form-floating date" id="date3" data-target-input="nearest">-->
-    <!--                                        <input type="text" class="form-control datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />-->
-    <!--                                        <label for="datetime">Date & Time</label>-->
-    <!--                                    </div>-->
-    <!--                                </div>-->
-    <!--                                <div class="col-md-6">-->
-    <!--                                    <div class="form-floating">-->
-    <!--                                        <select class="form-select" id="select1">-->
-    <!--                                          <option value="1">People 1</option>-->
-    <!--                                          <option value="2">People 2</option>-->
-    <!--                                          <option value="3">People 3</option>-->
-    <!--                                        </select>-->
-    <!--                                        <label for="select1">No Of People</label>-->
-    <!--                                      </div>-->
-    <!--                                </div>-->
-    <!--                                <div class="col-12">-->
-    <!--                                    <div class="form-floating">-->
-    <!--                                        <textarea class="form-control" placeholder="Special Request" id="message" style="height: 100px"></textarea>-->
-    <!--                                        <label for="message">Special Request</label>-->
-    <!--                                    </div>-->
-    <!--                                </div>-->
-    <!--                                <div class="col-12">-->
-    <!--                                    <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>-->
-    <!--                                </div>-->
-    <!--                            </div>-->
-    <!--                        </form>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-
-    <!--        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-    <!--            <div class="modal-dialog">-->
-    <!--                <div class="modal-content rounded-0">-->
-    <!--                    <div class="modal-header">-->
-    <!--                        <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>-->
-    <!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-    <!--                    </div>-->
-    <!--                    <div class="modal-body">-->
-    <!--                        &lt;!&ndash; 16:9 aspect ratio &ndash;&gt;-->
-    <!--                        <div class="ratio ratio-16x9">-->
-    <!--                            <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"-->
-    <!--                                allow="autoplay"></iframe>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        &lt;!&ndash; Reservation Start &ndash;&gt;-->
-
+    <!-- News Headlines Start -->
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="text-center">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Trending Headlines</h5>
+                <h1 class="mb-5">Stay Updated!</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel">
+                {% for n_img, title, dec in list1 %}
+                <div class="testimonial-item bg-transparent border rounded p-4">
+                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                    <p>{{dec}}</p>
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded-circle" src="{{n_img}}"
+                             style="width: 50px; height: 50px;">
+                        <div class="ps-3">
+                            <h5 class="mb-1">{{title}}</h5>
+                            <!--                                <small>Profession</small>-->
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- News Headlines End -->
 
     <!-- Team Start -->
     <div class="container-xxl pt-5 pb-3">
@@ -515,20 +461,6 @@
                 <h1 class="mb-5">Creators</h1>
             </div>
             <div class="row g-4 justify-content-center">
-                <!--                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.0s">-->
-                <!--                        <div class="team-item text-center rounded overflow-hidden">-->
-                <!--                            <div class="rounded-circle overflow-hidden m-4">-->
-                <!--                                <img class="img-fluid" src="{% static 'img/team-1.jpg'%}" alt="">-->
-                <!--                            </div>-->
-                <!--                            <h5 class="mb-0">Full Name</h5>-->
-                <!--                            <small>Designation</small>-->
-                <!--                            <div class="d-flex justify-content-center mt-3">-->
-                <!--                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>-->
-                <!--                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>-->
-                <!--                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item text-center rounded overflow-hidden">
                         <div class="rounded-circle overflow-hidden m-4">
@@ -557,52 +489,12 @@
                         </div>
                     </div>
                 </div>
-                <!--                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">-->
-                <!--                        <div class="team-item text-center rounded overflow-hidden">-->
-                <!--                            <div class="rounded-circle overflow-hidden m-4">-->
-                <!--                                <img class="img-fluid" src="{% static 'img/team-4.jpg'%}" alt="">-->
-                <!--                            </div>-->
-                <!--                            <h5 class="mb-0">Full Name</h5>-->
-                <!--                            <small>Designation</small>-->
-                <!--                            <div class="d-flex justify-content-center mt-3">-->
-                <!--                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>-->
-                <!--                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>-->
-                <!--                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>-->
-                <!--                            </div>-->
             </div>
         </div>
     </div>
 </div>
 </div>
 <!-- Team End -->
-
-
-<!-- News Headlines Start -->
-<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-    <div class="container">
-        <div class="text-center">
-            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Trending Headlines</h5>
-            <h1 class="mb-5">Stay Updated!</h1>
-        </div>
-        <div class="owl-carousel testimonial-carousel">
-            {% for n_img, title, dec in list1 %}
-            <div class="testimonial-item bg-transparent border rounded p-4">
-                <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                <p>{{dec}}</p>
-                <div class="d-flex align-items-center">
-                    <img class="img-fluid flex-shrink-0 rounded-circle" src="{{n_img}}"
-                         style="width: 50px; height: 50px;">
-                    <div class="ps-3">
-                        <h5 class="mb-1">{{title}}</h5>
-                        <!--                                <small>Profession</small>-->
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-<!-- News Headlines End -->
 
 
 <!-- Footer Start -->

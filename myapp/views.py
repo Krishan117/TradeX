@@ -117,6 +117,8 @@ def menu(request):
 
 def booking(request, id1):
     # to timestemp(24 hours)
+    context = {}
+
     date = datetime.datetime.utcnow()
     utc_time = (str(calendar.timegm(date.utctimetuple())))
 
@@ -125,12 +127,15 @@ def booking(request, id1):
     future = datetime.datetime.utcnow() - datetime.timedelta(hours=24)
     p1 = (str(calendar.timegm(future.timetuple())))
     name = id1.upper()
+    context['name'] = name
     id = id1
+    context['id'] = id
 
     graph = cg.get_coin_market_chart_range_by_id(id, vs_currency='inr', from_timestamp=p1,
                                                  to_timestamp=utc_time)
     # print(graph)
     g1 = graph['prices']
+    context['g1'] = g1
     g2 = []
     g3 = []
     time1 = []
@@ -143,7 +148,8 @@ def booking(request, id1):
         t1 = pd.to_datetime(i, utc=False, unit='ms')
         st = str(t1.time())
         time1.append(st)
-    print(time1)
+        context['time1'] = time1
+        # print(time1)
 
     # to timestemp(30 days)
     date = datetime.datetime.utcnow()
@@ -160,6 +166,7 @@ def booking(request, id1):
                                                    to_timestamp=utc_time)
     # print(graph30)
     gt1 = graph30['prices']
+    context['gt1'] = gt1
     gt2 = []
     time2 = []
     for prices in gt1:
@@ -170,10 +177,39 @@ def booking(request, id1):
         r1 = pd.to_datetime(i, utc=False, unit='ms')
         st1 = str(r1.date())
         time2.append(st1)
-    print(time2)
+        context['time2'] = time2
+        # print(time2)
 
-    return render(request, 'booking.html',
-                  {'g1': g1, 'time1': time1, 'id': id, 'id1': id1, 'name': name, 'gt1': gt1, 'time2': time2})
+        # to timestemp(1 year)
+        # date = datetime.datetime.utcnow()
+        # utc_time = (str(calendar.timegm(date.utctimetuple())))
+        #
+        # # from timestamp(1 year)
+        #
+        # future = datetime.datetime.utcnow() - datetime.timedelta(days=60)
+        # p3 = (str(calendar.timegm(future.timetuple())))
+        # # name = id1.upper()
+        # id = id1
+        #
+        # graph1 = cg.get_coin_market_chart_range_by_id(id, vs_currency='inr', from_timestamp=p3,
+        #                                               to_timestamp=utc_time)
+        # # print(graph30)
+        # gy1 = graph1['prices']
+        # context['gy1'] = gy1
+        # gy2 = []
+        # time3 = []
+        # for prices in gy1:
+        #     tme = prices[0] + 19800000
+        #     gy2.append(tme)
+        #
+        # for i in gy2:
+        #     r1 = pd.to_datetime(i, utc=False, unit='ms')
+        #     st1 = str(r1.date())
+        #     time3.append(st1)
+        #     context['time3'] = time3
+            # print(time2)
+
+    return render(request, 'booking.html', context)
 
 
 def testimonial(request):

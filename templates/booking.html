@@ -206,7 +206,6 @@
                 </ul>
                 <!-- Graph start -->
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<!--                <h1>{{name}}</h1>-->
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div>
@@ -220,8 +219,9 @@
                                 labels: labels,
                                 datasets: [{
                                   label: 'Price (past 24 hours) in INR',
-                                  backgroundColor: '#fea116',
+                                  backgroundColor: 'rgba(254,161,22,0.5195027840237658)',
                                   borderColor: '#fea116',
+                                  fill: true,
                                   data: {{g1|safe}},
                                 }]
                               };
@@ -236,6 +236,8 @@
                                 document.getElementById('myChart24'),
                                 config
                               );
+
+
 
 
                     </script>
@@ -253,8 +255,9 @@
                                 labels: labels2,
                                 datasets: [{
                                   label: 'Price (past 30 Days) in INR',
-                                  backgroundColor: '#fea116',
+                                  backgroundColor: 'rgba(254,161,22,0.5195027840237658)',
                                   borderColor: '#fea116',
+                                  fill: true,
                                   data: {{gt1|safe}},
                                 }]
                               };
@@ -267,6 +270,39 @@
                                 document.getElementById('dayschart'),
                                 daysconfig
                               );
+
+
+                    </script>
+                    <!-- Graph end -->
+                    <div id="tab-3" class="tab-pane fade show p-0">
+                        <div>
+                            <canvas id="yearchart"></canvas>
+                        </div>
+                    </div>
+
+                    <script>
+                              const labels3 = {{time1|safe}};
+                              const data3 = {
+                                labels: labels3,
+                                datasets: [{
+                                  label: 'Price (past 1 Year) in INR',
+                                  backgroundColor: 'rgba(254,161,22,0.5195027840237658)',
+                                  borderColor: '#fea116',
+                                  fill: true,
+                                  data: {{g1|safe}},
+                                }]
+                              };
+                            const yearconfig = {
+                              type: 'line',
+                              data: data3
+                            };
+
+                              const yearchart = new Chart(
+                                document.getElementById('yearchart'),
+                                yearconfig
+                              );
+
+
                     </script>
                     <!-- Graph end -->
                 </div>
@@ -274,40 +310,6 @@
         </div>
     </div>
 
-
-    <!-- Graph start -->
-    <!--            <h1>Bitcoin</h1>-->
-    <!--         <div class="row g-6 mx-sm-5">-->
-    <!--             <canvas id="myChart"></canvas>-->
-    <!--         </div>-->
-
-    <!--        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
-    <!--        <script>-->
-    <!--      const labels = {{l2}};-->
-
-    <!--        const data = {-->
-    <!--          labels: labels,-->
-    <!--          datasets: [{-->
-    <!--            label: 'Price (past 1 day) in INR',-->
-    <!--            data: {{l1}},-->
-    <!--            fill: false,-->
-    <!--            borderColor: 'rgb(75, 192, 192)',-->
-    <!--            tension: 0.1-->
-    <!--          }]-->
-    <!--        };-->
-
-    <!--      const config = {-->
-    <!--        type: 'line',-->
-    <!--         data: data,-->
-    <!--      };-->
-
-    <!--          const myChart = new Chart(-->
-    <!--            document.getElementById('myChart'),-->
-    <!--            config-->
-    <!--          );-->
-
-    <!--        </script>-->
-    <!-- Graph end -->
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
