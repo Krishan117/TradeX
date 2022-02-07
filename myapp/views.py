@@ -207,7 +207,7 @@ def booking(request, id1):
         #     st1 = str(r1.date())
         #     time3.append(st1)
         #     context['time3'] = time3
-            # print(time2)
+        # print(time2)
 
     return render(request, 'booking.html', context)
 
