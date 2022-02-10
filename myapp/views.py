@@ -26,13 +26,28 @@ def index(request):
     name1 = []
     img1 = []
     price1 = []
+    id1 = []
     for i in l1:
         mydic = i["item"]
         for j in i.values():
             name1.append(j["name"])
             img1.append(j["large"])
             price1.append(j["price_btc"])
-            cryptrendlist = zip(name1, img1, price1)
+            id1.append(j['id'])
+            cryptrendlist = zip(name1, img1, price1, id1)
+
+    # top-gainers
+    url = "https://nse-data1.p.rapidapi.com/top_gainers"
+
+    headers = {
+        'x-rapidapi-host': "nse-data1.p.rapidapi.com",
+        'x-rapidapi-key': "0ea47ed616msha4006358d096b16p1e262djsneec1fc0b2d8f"
+    }
+
+    response = requests.request("GET", url, headers=headers)
+    top_gainers = response.text
+
+    print(type(top_gainers))
 
     # top-headlines
     newsapi = NewsApiClient(api_key='6e7eacc7bb504b55a56f04a05456b9f5')
@@ -107,9 +122,6 @@ def menu(request):
         d_low.append(s_dic['dayLow'])
         s_change.append(s_dic['change'])
         p_change.append(s_dic['pChange'])
-        # if a[0:9]:
-
-        #     break
 
     l2 = zip(s_name, s_price, d_high, d_low, s_change, p_change)
     return render(request, 'menu.html', {'mylist': mylist, 'l2': l2})
@@ -124,7 +136,7 @@ def booking(request, id1):
 
     # from timestamp(24 hours)
 
-    future = datetime.datetime.utcnow() - datetime.timedelta(hours=24)
+    future = datetime.datetime.utcnow() - datetime.timedelta(days=1)
     p1 = (str(calendar.timegm(future.timetuple())))
     name = id1.upper()
     context['name'] = name
@@ -157,7 +169,7 @@ def booking(request, id1):
 
     # from timestamp(30 hours)
 
-    future = datetime.datetime.utcnow() - datetime.timedelta(days=31)
+    future = datetime.datetime.utcnow() - datetime.timedelta(weeks=4.34524)
     p2 = (str(calendar.timegm(future.timetuple())))
     # name = id1.upper()
     id = id1
@@ -180,35 +192,34 @@ def booking(request, id1):
         context['time2'] = time2
         # print(time2)
 
-        # to timestemp(1 year)
-        # date = datetime.datetime.utcnow()
-        # utc_time = (str(calendar.timegm(date.utctimetuple())))
-        #
-        # # from timestamp(1 year)
-        #
-        # future = datetime.datetime.utcnow() - datetime.timedelta(days=60)
-        # p3 = (str(calendar.timegm(future.timetuple())))
-        # # name = id1.upper()
-        # id = id1
-        #
-        # graph1 = cg.get_coin_market_chart_range_by_id(id, vs_currency='inr', from_timestamp=p3,
-        #                                               to_timestamp=utc_time)
-        # # print(graph30)
-        # gy1 = graph1['prices']
-        # context['gy1'] = gy1
-        # gy2 = []
-        # time3 = []
-        # for prices in gy1:
-        #     tme = prices[0] + 19800000
-        #     gy2.append(tme)
-        #
-        # for i in gy2:
-        #     r1 = pd.to_datetime(i, utc=False, unit='ms')
-        #     st1 = str(r1.date())
-        #     time3.append(st1)
-        #     context['time3'] = time3
-        # print(time2)
+    # to timestemp(1 year)
+    date = datetime.datetime.utcnow()
+    utc_time = (str(calendar.timegm(date.utctimetuple())))
 
+    # from timestamp(1 year)
+
+    future = datetime.datetime.utcnow() - datetime.timedelta(weeks=52.1786)
+    p3 = (str(calendar.timegm(future.timetuple())))
+    # name = id1.upper()
+    id = id1
+
+    graph1 = cg.get_coin_market_chart_range_by_id(id, vs_currency='inr', from_timestamp=p3,
+                                                  to_timestamp=utc_time)
+    # print(graph30)
+    gy1 = graph1['prices']
+    context['gy1'] = gy1
+    gy2 = []
+    time3 = []
+    for prices in gy1:
+        tme = prices[0] + 19800000
+        gy2.append(tme)
+
+    for i in gy2:
+        r1 = pd.to_datetime(i, utc=False, unit='ms')
+        st1 = str(r1.date())
+        time3.append(st1)
+        context['time3'] = time3
+    # print(time2)
     return render(request, 'booking.html', context)
 
 
@@ -262,18 +273,17 @@ def log_out(request):
     logout(request)
     return redirect('index')
 
-
-class ChartData(APIView):
-    authentication_classes = []
-    permission_classes = []
-
-    def get(self, request, format=None):
-        labels = []
-        chartLabel = "my data"
-        chartdata = [0, 10, 5, 2, 20, 30, 45]
-        data = {
-            "labels": labels,
-            "chartLabel": chartLabel,
-            "chartdata": chartdata,
-        }
-        return Response(data)
+# class ChartData(APIView):
+#     authentication_classes = []
+#     permission_classes = []
+#
+#     def get(self, request, format=None):
+#         labels = []
+#         chartLabel = "my data"
+#         chartdata = [0, 10, 5, 2, 20, 30, 45]
+#         data = {
+#             "labels": labels,
+#             "chartLabel": chartLabel,
+#             "chartdata": chartdata,
+#         }
+#         return Response(data)

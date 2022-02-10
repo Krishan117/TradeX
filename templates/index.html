@@ -82,8 +82,7 @@
                 {% if request.user.is_authenticated %}
                 <a class="btn btn-primary py-2 px-4" href="{% url 'log_out' %}" role="button">{{user}}</a>
                 {% else %}
-                <a class="btn btn-primary py-2 px-4" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Login
-                    \ SignUp</a>
+                <a class="btn btn-primary py-2 px-4" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Login</a>
                 {% endif %}
             </div>
         </nav>
@@ -167,7 +166,7 @@
                         <h1 class="display-3 text-white animated slideInLeft">Digital Trading<br>Made Easy</h1>
                         <p class="text-white animated slideInLeft mb-4 pb-2">Let's get started today to get free
                             cryptocurrency statistics, events and latest news.</p>
-                        <a href="" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Get Started > </a>
+                        <a href="#get_started" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Get Started > </a>
                     </div>
                     <div class="col-lg-6 text-center text-lg-end overflow-hidden">
                         <img class="img-fluid" src="img/hero.png" alt="">
@@ -288,7 +287,8 @@
 
 
     <!-- Menu Start -->
-    <div class="container-xxl py-5">
+    <br>
+    <div class="container-xxl py-5" id="get_started">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h5 class="section-title ff-secondary text-center text-primary fw-normal">Trending</h5>
@@ -403,8 +403,9 @@
                     </div>
                     <div id="tab-3" class="tab-pane fade show p-0">
                         <div class="row g-4 justify-content-center">
-                            {% for name1, img1, price1 in cryptrendlist %}
+                            {% for name1, img1, price1, id1 in cryptrendlist %}
                             <div class="col-lg-3 justify-content-center">
+                                <a href="{% url 'booking' id1 %}">
                                 <div class="d-flex align-items-center">
                                     <img class="flex-shrink-0 img-fluid rounded" src="{{img1}}" alt=""
                                          style="width: 70px;">
@@ -416,6 +417,8 @@
                                         <!--                                            <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>-->
                                     </div>
                                 </div>
+                                </a>
+
                                 <br>
                             </div>
                             {% endfor %}
