@@ -36,18 +36,48 @@ def index(request):
             id1.append(j['id'])
             cryptrendlist = zip(name1, img1, price1, id1)
 
-    # top-gainers
-    url = "https://nse-data1.p.rapidapi.com/top_gainers"
+     # top-gainers
+        url = "https://latest-stock-price.p.rapidapi.com/any"
+        headers = {
+            'x-rapidapi-host': "latest-stock-price.p.rapidapi.com",
+            'x-rapidapi-key': "a0cbf7e4a6msh8774514d0c1c6c5p1e0d80jsn3374cad14b76"
+        }
+        response = requests.request("GET", url, headers=headers)
+        l1 = response.text
+        a = json.loads(l1)
+        s_name = []
+        s_price = []
+        d_high = []
+        d_low = []
+        s_change = []
+        p_change = []
 
-    headers = {
-        'x-rapidapi-host': "nse-data1.p.rapidapi.com",
-        'x-rapidapi-key': "0ea47ed616msha4006358d096b16p1e262djsneec1fc0b2d8f"
-    }
+        for j in range(len(a)):
+            s_dic = a[j]
+            s_name.append(s_dic['symbol'])
+            s_price.append(s_dic['lastPrice'])
+            d_high.append(s_dic['dayHigh'])
+            d_low.append(s_dic['dayLow'])
+            s_change.append(s_dic['change'])
+            p_change.append(s_dic['pChange'])
 
-    response = requests.request("GET", url, headers=headers)
-    top_gainers = response.text
+        l2 = zip(s_name, s_price, d_high, d_low, s_change, p_change)
 
-    print(type(top_gainers))
+        tgs_name = s_name[1:11]
+        tgs_price = s_price[1:11]
+        tgd_high = d_high[1:11]
+        tgd_low = d_low[1:11]
+        tgs_change = s_change[1:11]
+        tgp_change = p_change[1:11]
+    # top-loosers
+        tls_name = s_name[658:668]
+        tls_price = s_price[658:668]
+        tld_high = d_high[658:668]
+        tld_low = d_low[658:668]
+        tls_change = s_change[658:668]
+        tlp_change = p_change[658:668]
+        top_gainers = zip(tgs_name, tgs_price, tgd_high, tgd_low, tgs_change, tgp_change)
+        top_loosers = zip(tls_name, tls_price, tld_high, tld_low, tls_change, tlp_change)
 
     # top-headlines
     newsapi = NewsApiClient(api_key='6e7eacc7bb504b55a56f04a05456b9f5')
@@ -64,7 +94,10 @@ def index(request):
         dec.append(dic['description'])
 
     list1 = zip(n_img, title, dec)
-    return render(request, 'index.html', {'list1': list1, 'cryptrendlist': cryptrendlist})
+    return render(request, 'index.html', {'list1': list1,
+                                          'cryptrendlist': cryptrendlist,
+                                          'top_gainers': top_gainers,
+                                          'top_loosers': top_loosers})
 
 
 def about(request):

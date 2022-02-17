@@ -59,22 +59,99 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0 pe-4">
                     <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
-                    <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                    <a href="{% url 'service' %}" class="nav-item nav-link">Service</a>
-                    <a href="{% url 'menu' %}" class="nav-item nav-link">Menu</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <!--                                <a href="booking.html" class="dropdown-item active">Booking</a>-->
-                            <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
-                            <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
-                        </div>
-                    </div>
+<!--                    <a href="{% url 'about' %}" class="nav-item nav-link">About</a>-->
+<!--                    <a href="{% url 'service' %}" class="nav-item nav-link">Service</a>-->
+                    <a href="{% url 'menu' %}" class="nav-item nav-link">Stocks</a>
+                    <a href="{% url 'team'%}" class="nav-item nav-link">Team</a>
+<!--                    <div class="nav-item dropdown">-->
+<!--                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>-->
+<!--                        <div class="dropdown-menu m-0">-->
+<!--                            <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>-->
+<!--                            <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
+               {% if request.user.is_authenticated %}
+                <a class="btn btn-primary py-2 px-4" href="{% url 'log_out' %}" role="button">Welcome, {{user}}</a>
+                {% else %}
+                <a class="btn btn-primary py-2 px-4" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Login</a>
+                {% endif %}
             </div>
         </nav>
+
+        <!--Modal Start-->
+        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+             tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalToggleLabel">LOGIN</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="form1" method="POST" action="{% url 'log_in' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="email">Email-ID:</label>
+                                <input type="text" class="form-control" name="username" id="email"
+                                       aria-describedby="emailHelp" placeholder="Enter Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="Password">Password:</label>
+                                <input type="password" class="form-control" name="password" id="Password"
+                                       placeholder="Enter Password">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-dismiss="modal"
+                                data-bs-toggle="modal">Create New Account
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+             tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalToggleLabel2">CREATE NEW ACCOUNT</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="form1" method="post" action="{% url 'register' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="email">Email-ID:</label>
+                                <input type="text" class="form-control" name="username" id="semail"
+                                       aria-describedby="emailHelp" placeholder="Enter Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="spassword">Password:</label>
+                                <input type="password" class="form-control" name="password" id="sPassword"
+                                       placeholder="Enter Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="cpassword">Confirm Password:</label>
+                                <input type="password" class="form-control" name="cpassword" id="cpassword"
+                                       placeholder="Re-Enter Password">
+                            </div>
+                     </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-dismiss="modal"
+                                data-bs-toggle="modal">Already Have Account
+                        </button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--Modal End-->
+
 
         <div class="container-xxl py-5 bg-dark hero-header mb-5">
             <div class="container text-center my-5 pt-5 pb-4">
@@ -90,87 +167,8 @@
         </div>
     </div>
     <!-- Navbar & Hero End -->
-
-
-    <!-- Reservation Start -->
-    <!--        <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">-->
-    <!--            <div class="row g-0">-->
-    <!--                <div class="col-md-6">-->
-    <!--                    <div class="video">-->
-    <!--                        <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">-->
-    <!--                            <span></span>-->
-    <!--                        </button>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--                <div class="col-md-6 bg-dark d-flex align-items-center">-->
-    <!--                    <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">-->
-    <!--                        <h5 class="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>-->
-    <!--                        <h1 class="text-white mb-4">Book A Table Online</h1>-->
-    <!--                        <form>-->
-    <!--                            <div class="row g-3">-->
-    <!--                                <div class="col-md-6">-->
-    <!--                                    <div class="form-floating">-->
-    <!--                                        <input type="text" class="form-control" id="name" placeholder="Your Name">-->
-    <!--                                        <label for="name">Your Name</label>-->
-    <!--                                    </div>-->
-    <!--                                </div>-->
-    <!--                                <div class="col-md-6">-->
-    <!--                                    <div class="form-floating">-->
-    <!--                                        <input type="email" class="form-control" id="email" placeholder="Your Email">-->
-    <!--                                        <label for="email">Your Email</label>-->
-    <!--                                    </div>-->
-    <!--                                </div>-->
-    <!--                                <div class="col-md-6">-->
-    <!--                                    <div class="form-floating date" id="date3" data-target-input="nearest">-->
-    <!--                                        <input type="text" class="form-control datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />-->
-    <!--                                        <label for="datetime">Date & Time</label>-->
-    <!--                                    </div>-->
-    <!--                                </div>-->
-    <!--                                <div class="col-md-6">-->
-    <!--                                    <div class="form-floating">-->
-    <!--                                        <select class="form-select" id="select1">-->
-    <!--                                          <option value="1">People 1</option>-->
-    <!--                                          <option value="2">People 2</option>-->
-    <!--                                          <option value="3">People 3</option>-->
-    <!--                                        </select>-->
-    <!--                                        <label for="select1">No Of People</label>-->
-    <!--                                      </div>-->
-    <!--                                </div>-->
-    <!--                                <div class="col-12">-->
-    <!--                                    <div class="form-floating">-->
-    <!--                                        <textarea class="form-control" placeholder="Special Request" id="message" style="height: 100px"></textarea>-->
-    <!--                                        <label for="message">Special Request</label>-->
-    <!--                                    </div>-->
-    <!--                                </div>-->
-    <!--                                <div class="col-12">-->
-    <!--                                    <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>-->
-    <!--                                </div>-->
-    <!--                            </div>-->
-    <!--                        </form>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-
-    <!--        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-    <!--            <div class="modal-dialog">-->
-    <!--                <div class="modal-content rounded-0">-->
-    <!--                    <div class="modal-header">-->
-    <!--                        <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>-->
-    <!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-    <!--                    </div>-->
-    <!--                    <div class="modal-body">-->
-    <!--                        &lt;!&ndash; 16:9 aspect ratio &ndash;&gt;-->
-    <!--                        <div class="ratio ratio-16x9">-->
-    <!--                            <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"-->
-    <!--                                allow="autoplay"></iframe>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!-- Reservation end -->
-    <div class="container-xxl py-5">
+    <!-- BODY START -->
+       <div class="container-xxl py-5">
         <div class="container">
             <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
                 <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
@@ -238,11 +236,6 @@
                                 document.getElementById('myChart24'),
                                 config
                               );
-
-
-
-
-
                     </script>
                     <!-- Graph end -->
 
@@ -275,9 +268,6 @@
                                 document.getElementById('dayschart'),
                                 daysconfig
                               );
-
-
-
                     </script>
                     <!-- Graph end -->
                     <div id="tab-3" class="tab-pane fade show p-0">
@@ -309,15 +299,13 @@
                                 document.getElementById('yearchart'),
                                 yearconfig
                               );
-
-
-
                     </script>
                     <!-- Graph end -->
                 </div>
             </div>
         </div>
     </div>
+    <!-- BODY END -->
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">

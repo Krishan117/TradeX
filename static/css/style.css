@@ -377,7 +377,7 @@
 /*** Testimonial ***/
 .testimonial-carousel .owl-item .testimonial-item,
 .testimonial-carousel .owl-item.center .testimonial-item * {
-    transition: .5s;
+    transition: 1s;
 }
 
 .testimonial-carousel .owl-item.center .testimonial-item {
@@ -404,7 +404,7 @@
     height: 15px;
     border: 1px solid #CCCCCC;
     border-radius: 15px;
-    transition: .5s;
+    transition: 1s;
 }
 
 .testimonial-carousel .owl-dot.active {
