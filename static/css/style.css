@@ -152,7 +152,7 @@
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9)), url(C:\Users\Rushi\PycharmProjects\TradeX\static\videos\video.mp4);
+    background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9)), url(../img/banner.png);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -389,7 +389,7 @@
     color: var(--light) !important;
 }
 
-.testimonial-carousel .owl-dots {
+/*.testimonial-carousel .owl-dots {
     margin-top: 24px;
     display: flex;
     align-items: flex-end;
@@ -410,7 +410,7 @@
 .testimonial-carousel .owl-dot.active {
     background: var(--primary);
     border-color: var(--primary);
-}
+}*/
 
 
 /*** Footer ***/
