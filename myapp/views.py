@@ -2,6 +2,9 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import View
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from plotly import *
+import plotly.graph_objects as go
+from dash import *
 from pycoingecko import CoinGeckoAPI
 from newsapi import NewsApiClient
 from django.core.paginator import *
@@ -106,7 +109,33 @@ def about(request):
 
 
 def service(request):
-    return render(request, 'service.html')
+    context = {}
+    cs_list = cg.get_coin_ohlc_by_id(id='bitcoin', vs_currency='inr', days='14')
+    gt1 = cs_list
+
+    gt2 = []
+    time2 = []
+    for l1 in cs_list:
+        tme = l1[0] + 19800000
+        gt2.append(tme)
+    for i in gt2:
+        r1 = pd.to_datetime(i, utc=False, unit='ms')
+        st1 = str(r1)
+        time2.append(st1)
+        a_dataframe = pd.DataFrame(time2)
+        context['a_dataframe'] = a_dataframe
+        b_dataframe = pd.DataFrame(cs_list)
+        context['dataframe'] = b_dataframe
+
+        # print(a_dataframe,b_dataframe)
+        fig = go.Figure(data=[go.Candlestick(x=a_dataframe[0],
+                                             open=b_dataframe[1],
+                                             high=b_dataframe[2],
+                                             low=b_dataframe[3],
+                                             close=b_dataframe[4])])
+        candlestick_div = plot(fig, output_type='div')
+        context['candlestick_div'] = candlestick_div
+    return render(request, 'service.html', context)
 
 
 def menu(request):

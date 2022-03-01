@@ -86,7 +86,13 @@
             </div>
         </div>
         <!-- Navbar & Hero End -->
-
+            <div class="col-12 my-4">
+             <div class="card mx-auto py-3">
+               {{candlestick_div | safe}}
+              </div>
+              <br>
+              <br>
+            </div>
 
         <!-- Service Start -->
         <div class="container-xxl py-5">
@@ -245,6 +251,7 @@
     </div>
 
     <!-- JavaScript Libraries -->
+    <script src="https://cdn.plot.ly/plotly.latest.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'lib/wow/wow.min.js' %}"></script>
