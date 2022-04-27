@@ -153,7 +153,7 @@ def menu(request):
     # print(price)
     for i in range(len(price)):
         dicc = price[i]
-        print(dicc)
+        # print(dicc)
         name.append(dicc['name'])
         img.append(dicc['image'])
         cr_price.append(dicc['current_price'])
@@ -204,7 +204,7 @@ def menu(request):
 
 
 def booking(request, id1):
-    # to timestemp(24 hours)
+    # to timestamp(24 hours)
     context = {}
 
     date = datetime.datetime.utcnow()
@@ -239,7 +239,7 @@ def booking(request, id1):
         context['time1'] = time1
         # print(time1)
 
-    # to timestemp(30 days)
+    # to timestamp(30 days)
     date = datetime.datetime.utcnow()
     utc_time = (str(calendar.timegm(date.utctimetuple())))
 
@@ -268,7 +268,7 @@ def booking(request, id1):
         context['time2'] = time2
         # print(time2)
 
-    # to timestemp(1 year)
+    # to timestamp(1 year)
     date = datetime.datetime.utcnow()
     utc_time = (str(calendar.timegm(date.utctimetuple())))
 
@@ -349,17 +349,4 @@ def log_out(request):
     logout(request)
     return redirect('index')
 
-# class ChartData(APIView):
-#     authentication_classes = []
-#     permission_classes = []
-#
-#     def get(self, request, format=None):
-#         labels = []
-#         chartLabel = "my data"
-#         chartdata = [0, 10, 5, 2, 20, 30, 45]
-#         data = {
-#             "labels": labels,
-#             "chartLabel": chartLabel,
-#             "chartdata": chartdata,
-#         }
-#         return Response(data)
+

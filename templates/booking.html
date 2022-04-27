@@ -155,7 +155,10 @@
 
         <div class="container-xxl py-5 bg-dark hero-header mb-5">
             <div class="container text-center my-5 pt-5 pb-4">
-                <h1 class="display-3 text-white mb-3 animated slideInDown">{{name}}</h1>
+                {% for img in mylist%}
+                <h1 class="display-3 text-white mb-3 animated slideInDown"><img class="flex-shrink-0 img-fluid rounded" src="{{img}}" alt=""
+                                         style="width: 80px;">{{name}}</h1>
+                {% endfor %}
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center text-uppercase">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -168,7 +171,7 @@
     </div>
     <!-- Navbar & Hero End -->
     <!-- BODY START -->
-       <div class="container-xxl py-5">
+       <div class="container-xxl py-5" style="width:70%;">
         <div class="container">
             <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
                 <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
@@ -206,8 +209,8 @@
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <div>
-                            <canvas id="myChart24"></canvas>
+                        <div >
+                            <canvas style="width:50px;" id="myChart24"></canvas>
                         </div>
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -226,12 +229,24 @@
                                 }]
                               };
 
-
                             const config = {
                               type: 'line',
                               data: data,
+                              options: {
+                                scales: {
+                                x: {
+                                    grid: {
+                                        display: false
+                                    }
+                                },
+                                  y: {
+                                    grid: {
+                                      display: false
+                                    }
+                                  }
+                                }
+                              }
                             };
-
                               const myChart24 = new Chart(
                                 document.getElementById('myChart24'),
                                 config
@@ -262,6 +277,20 @@
                             const daysconfig = {
                               type: 'line',
                               data: data2,
+                              options: {
+                                scales: {
+                                x: {
+                                    grid: {
+                                        display: false
+                                    }
+                                },
+                                  y: {
+                                    grid: {
+                                      display: false
+                                    }
+                                  }
+                                }
+                              }
                             };
 
                               const dayschart = new Chart(
@@ -292,7 +321,21 @@
                               };
                             const yearconfig = {
                               type: 'line',
-                              data: data3
+                              data: data3,
+                              options: {
+                                scales: {
+                                x: {
+                                    grid: {
+                                        display: false
+                                    }
+                                },
+                                  y: {
+                                    grid: {
+                                      display: false
+                                    }
+                                  }
+                                }
+                              }
                             };
 
                               const yearchart = new Chart(
@@ -305,6 +348,14 @@
             </div>
         </div>
     </div>
+     <div class="row g-4 justify-content-center">
+         <div class="col-lg-3 justify-content-center">
+           <a class="btn btn-primary py-2 px-4" role="button">Watchlist</a>
+         </div>
+     </div>
+
+
+
     <!-- BODY END -->
 
     <!-- Footer Start -->

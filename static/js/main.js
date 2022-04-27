@@ -99,7 +99,7 @@
         autoplaySpeed: 1500,
         center: true,
         margin: 24,
-        dots: false,
+        dots: true,
         loop: true,
         nav : false,
         responsive: {
